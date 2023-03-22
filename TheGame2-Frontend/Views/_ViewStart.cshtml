@@ -1,3 +1,18 @@
 ﻿@{
-    Layout = "_Layout";
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    Console.WriteLine(controller);
+    string currentLayout = "";
+    switch (controller)
+    {
+        case "Login":
+            currentLayout = "_Clear";
+            break;
+        case "Home":
+            currentLayout = "_HomeLayout";
+            break;
+        default:
+            currentLayout = "_Layout";
+            break;
+    }
+    Layout = currentLayout;
 }

@@ -1,12 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using TheGame2_Backend.Services.DBComponents;
 
-namespace TheGame2_Web.Services
+namespace TheGame2_Backend
 {
-    public class DBConnector : Controller
+    public class DBConnector : DBConnectorBase
     {
-        public IActionResult Index()
+
+        private string server;
+        private string database;
+        private string uid;
+        private string password;
+        public DBConnector() : base()
         {
-            return View();
+            server = "10.8.8.19";
+            database = "WebCon";
+            uid = "webconapi";
+            password = "webconapi";
+            string connectionString;
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";Connect Timeout=1000";
+
+            Initialize(connectionString);
         }
+
     }
+
 }

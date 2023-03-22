@@ -3,6 +3,45 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to TheGame!</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card border-info h-100">
+            <div class="card-header">
+                About TheGame
+            </div>
+            <div class="card-body">
+                <a>Find out what TheGame is about, how to get it and game basics</a>
+            </div>
+            <div class="card-footer">Find out more...</div>
+        </div>
+        </div>
+        <div class="col">
+        <div class="card border-info h-100">
+            <div class="card-header">
+                Join
+            </div>
+            <div class="card-body">
+                <p>To access more features log in or sign up!</p>
+            </div>
+            <div class="card-footer"
+                <a><a  asp-area="" asp-controller="Login" asp-action="Index">Login</a> | <a  asp-area="" asp-controller="Home" asp-action="SignUp">Sign Up</a></a>
+            </div>
+        </div>
+        </div>
+        <div class="col">
+        <div class="card border-info h-100">
+            <div class="card-header">
+                Galery
+            </div>
+            <div class="card-body">
+                See game footage and fanarts
+            </div>
+            <div class="card-footer">
+                <a>Visit</a>
+            </div>
+        </div>
+        </div>
+        
+    </div>
 </div>
