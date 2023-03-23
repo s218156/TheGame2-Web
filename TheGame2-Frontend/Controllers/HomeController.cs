@@ -32,6 +32,11 @@ namespace TheGame2_Frontend.Controllers
 
         }
 
+        public IActionResult Contribution()
+        {
+            return View();
+        }
+
 
     }
 }
