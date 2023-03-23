@@ -1,4 +1,4 @@
-﻿namespace TheGame2_Web.Models
+﻿namespace TheGame2_Backend.Models
 {
     public class UserModel
     {

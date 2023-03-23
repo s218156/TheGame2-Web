@@ -1,5 +1,6 @@
 ﻿using MySqlConnector;
-using TheGame2_Web.Models;
+using TheGame2_Backend.Models;
+using TheGame2_Backend.Models;
 using TheGame2_Web.Services.DBComponents;
 
 namespace TheGame2_Backend.Services.DBComponents
@@ -115,6 +116,39 @@ namespace TheGame2_Backend.Services.DBComponents
                 this.CloseConnection();
             }
             return value;
+        }
+
+        protected List<UserModel> ProcessSelectAllUsers(string query)
+        {
+            List<UserModel> users = new List<UserModel>();
+            if (this.OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                    users.Add(deserializer.DeserializeUser(dataReader));
+
+
+                dataReader.Close();
+                this.CloseConnection();
+            }
+            return users;
+        }
+        protected UserModel ProcessSelectUser(string query)
+        {
+            List<UserModel> users = new List<UserModel>();
+            if (this.OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                    users.Add(deserializer.DeserializeUser(dataReader));
+
+
+                dataReader.Close();
+                this.CloseConnection();
+            }
+            return users.FirstOrDefault();
         }
     }
 }

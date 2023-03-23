@@ -1,3 +1,4 @@
+using TheGame2_Backend;
 using TheGame2_Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<MultiplayerService>();
+builder.Services.AddTransient<DBConnector>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
