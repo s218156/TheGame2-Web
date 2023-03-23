@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TheGame2_Frontend.Models;
 
 namespace TheGame2_Frontend.Controllers
 {
@@ -22,5 +20,18 @@ namespace TheGame2_Frontend.Controllers
         {
             return View();
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Galery()
+        {
+            return View();
+
+        }
+
+
     }
 }

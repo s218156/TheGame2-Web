@@ -3,45 +3,52 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to TheGame!</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="container p-5">
+        <h1 class="display-4">Welcome to TheGame2!</h1>
+        <img src="/Images/player.png" width="150" height="150">
+    </div>
+    <div class="container p-3">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card border-info h-100">
             <div class="card-header">
-                About TheGame
+                <h3>About TheGame</h3>
             </div>
             <div class="card-body">
                 <a>Find out what TheGame is about, how to get it and game basics</a>
             </div>
-            <div class="card-footer">Find out more...</div>
+            <div class="card-footer"><a  asp-area="" asp-controller="Home" asp-action="About">Find out more...</a></div>
         </div>
         </div>
         <div class="col">
         <div class="card border-info h-100">
+            <img src="/Images/Join_graphic.png" class="card-img-top" height="75" >
             <div class="card-header">
-                Join
+                <h3>Join</h3>
             </div>
             <div class="card-body">
                 <p>To access more features log in or sign up!</p>
             </div>
-            <div class="card-footer"
-                <a><a  asp-area="" asp-controller="Login" asp-action="Index">Login</a> | <a  asp-area="" asp-controller="Home" asp-action="SignUp">Sign Up</a></a>
+            <div class="card-footer">
+                <a><a  asp-area="" asp-controller="Login" asp-action="Index">Login</a> or <a  asp-area="" asp-controller="Home" asp-action="SignUp">Sign Up</a></a>
             </div>
         </div>
         </div>
         <div class="col">
         <div class="card border-info h-100">
             <div class="card-header">
-                Galery
+                <h3>Galery</h3>
             </div>
             <div class="card-body">
                 See game footage and fanarts
             </div>
             <div class="card-footer">
-                <a>Visit</a>
+                <a  asp-area="" asp-controller="Home" asp-action="Galery">Visit</a>
             </div>
         </div>
         </div>
         
     </div>
+    </div>
+    
 </div>
