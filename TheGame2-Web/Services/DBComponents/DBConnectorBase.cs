@@ -1,6 +1,5 @@
 ﻿using MySqlConnector;
-using TheGame2_Backend.Models;
-using TheGame2_Backend.Models;
+using TheGame2_Library.Models;
 using TheGame2_Web.Services.DBComponents;
 
 namespace TheGame2_Backend.Services.DBComponents
@@ -136,6 +135,15 @@ namespace TheGame2_Backend.Services.DBComponents
         }
         protected UserModel ProcessSelectUser(string query)
         {
+            List<UserModel> users = ProcessSelectUsers(query);
+            if (users.Count() == 1)
+                return users.FirstOrDefault();
+            else
+                return null;
+        }
+
+        protected List<UserModel> ProcessSelectUsers(string query)
+        {
             List<UserModel> users = new List<UserModel>();
             if (this.OpenConnection())
             {
@@ -148,7 +156,9 @@ namespace TheGame2_Backend.Services.DBComponents
                 dataReader.Close();
                 this.CloseConnection();
             }
-            return users.FirstOrDefault();
+            return users;
         }
+
+
     }
 }

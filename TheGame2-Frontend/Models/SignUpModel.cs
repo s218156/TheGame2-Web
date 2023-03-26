@@ -1,12 +1,10 @@
-﻿namespace TheGame2_Backend.Models
+﻿namespace TheGame2_Frontend.Models
 {
-    public class UserModel
+    public class SignUpModel
     {
-        public int id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
+        public string passwordConfirm { get; set; }
         public string fullname { get; set; }
-        public int textureID { get; set; }
     }
-
 }

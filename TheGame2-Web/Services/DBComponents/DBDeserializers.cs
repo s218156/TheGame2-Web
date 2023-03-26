@@ -1,5 +1,5 @@
 ﻿using MySqlConnector;
-using TheGame2_Backend.Models;
+using TheGame2_Library.Models;
 
 namespace TheGame2_Web.Services.DBComponents
 {
@@ -13,6 +13,9 @@ namespace TheGame2_Web.Services.DBComponents
             model.fullname = dataReader.GetString("fullname");
             model.textureID = dataReader.GetInt32("textureID");
             model.password = "";
+            model.refreshToken = dataReader.GetString("refreshToken");
+            model.expiredDate = dataReader.GetDateTime("expiredDate");
+            model.authToken = dataReader.GetString("authToken");
             return model;
         }
     }

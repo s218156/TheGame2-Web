@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheGame2-Backend", "TheGame2-Web\TheGame2-Backend.csproj", "{DB0277E5-637E-465A-A329-06F5C605B709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGame2-Frontend", "TheGame2-Frontend\TheGame2-Frontend.csproj", "{D04CCE10-7809-4CB0-8BCD-3C963A846BEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheGame2-Frontend", "TheGame2-Frontend\TheGame2-Frontend.csproj", "{D04CCE10-7809-4CB0-8BCD-3C963A846BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheGame2-Library", "TheGame2-Library\TheGame2-Library.csproj", "{BE7AD898-3B42-4A62-84DF-8E0FD8C08196}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D04CCE10-7809-4CB0-8BCD-3C963A846BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D04CCE10-7809-4CB0-8BCD-3C963A846BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D04CCE10-7809-4CB0-8BCD-3C963A846BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE7AD898-3B42-4A62-84DF-8E0FD8C08196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7AD898-3B42-4A62-84DF-8E0FD8C08196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7AD898-3B42-4A62-84DF-8E0FD8C08196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7AD898-3B42-4A62-84DF-8E0FD8C08196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

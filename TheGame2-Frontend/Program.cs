@@ -1,7 +1,10 @@
+using TheGame2_Frontend.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<ApiCommunicationService>();
 
 var app = builder.Build();
 
