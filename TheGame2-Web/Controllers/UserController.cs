@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheGame2_Backend;
+using TheGame2_Library.Exceptions;
 using TheGame2_Library.Misc;
 using TheGame2_Library.Models;
+using TheGame2_Web.Services;
 
 namespace TheGame2_Web.Controllers
 {
@@ -10,9 +12,11 @@ namespace TheGame2_Web.Controllers
     public class UserController : ControllerBase
     {
         DBConnector db;
-        public UserController(DBConnector db)
+        ActiveUserService userService;
+        public UserController(DBConnector db, ActiveUserService userService)
         {
             this.db = db;
+            this.userService = userService;
         }
 
         [HttpGet("GetAllUsers")]
@@ -43,11 +47,12 @@ namespace TheGame2_Web.Controllers
             {
                 UserModel user = CustomEncryption.DecryptUser(token);
                 db.VerifyUser(user);
+                userService.UpdateUserTime(user);
                 return db.GetUserData(user);
             }
-            catch (Exception e)
+            catch (TheGameWebException e)
             {
-                Response.StatusCode = 600;
+                Response.StatusCode = Int32.Parse(e.ExceptionCode);
                 Console.WriteLine("Different token");
                 return new UserModel();
             }
@@ -60,12 +65,43 @@ namespace TheGame2_Web.Controllers
             try
             {
                 UserModel user = CustomEncryption.DecryptUser(token);
+                userService.UpdateUserTime(user);
                 db.VerifyUser(user);
             }
-            catch (Exception e)
+            catch (TheGameWebException e)
             {
-                Response.StatusCode = 600;
+                Response.StatusCode = Int32.Parse(e.ExceptionCode);
             }
+        }
+
+        [HttpPost("Create")]
+        public void Create([FromBody] UserModel model)
+        {
+            try
+            {
+                model.password = CustomEncryption.DecryptPassword(model.password);
+                model.password = CustomEncryption.EncryptPasswordForDatabase(model);
+                db.AddUser(model);
+            }
+            catch (TheGameWebException e)
+            {
+                Response.StatusCode = Int32.Parse(e.ExceptionCode);
+            }
+        }
+        [HttpGet("Logout")]
+        public void LogoutUser()
+        {
+            string token = Request.Headers["auth"].ToString();
+            try
+            {
+                UserModel user = CustomEncryption.DecryptUser(token);
+                db.LogoutUser(user);
+            }
+            catch (TheGameWebException e)
+            {
+                Response.StatusCode = Int32.Parse(e.ExceptionCode);
+            }
+
 
         }
 

@@ -1,4 +1,5 @@
 ﻿using TheGame2_Backend.Services.DBComponents;
+using TheGame2_Library.Exceptions;
 using TheGame2_Library.Models;
 
 namespace TheGame2_Backend
@@ -83,7 +84,28 @@ namespace TheGame2_Backend
                     isAuthorised = true;
             }
             if (!isAuthorised)
-                throw new Exception("User not authorized");
+                throw new TheGameWebException("600", "User not authorized");
+        }
+
+        public void AddUser(UserModel model)
+        {
+            string query = "SELECT * FROM TheGame.users WHERE username like '" + model.username + "';";
+            List<UserModel> users = ProcessSelectUsers(query);
+            if (users.Count() == 0)
+            {
+                query = "INSERT INTO TheGame.users (username, password, fullname, authToken, refreshToken) VALUES ('" + model.username + "', '" + model.password + "','" + model.fullname + "', '" + GenerateToken() + "','" + GenerateToken() + "');";
+                ProcessInsertUpdateQuery(query);
+            }
+            else
+            {
+                throw new TheGameWebException("600", "User already exists!");
+            }
+        }
+
+        public void LogoutUser(UserModel model)
+        {
+            string query = "UPDATE TheGame.users SET logedIn=0, authToken='" + GenerateToken() + "', refreshToken='" + GenerateToken() + "' WHERE (username='" + model.username + "');";
+            ProcessInsertUpdateQuery(query);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using TheGame2_Library.Models;
+﻿using TheGame2_Library.Exceptions;
+using TheGame2_Library.Models;
 
 namespace TheGame2_Frontend.Services
 {
@@ -14,7 +15,7 @@ namespace TheGame2_Frontend.Services
         private bool CheckResponseMessage(HttpResponseMessage res)
         {
             if (res.StatusCode.ToString() == "600")
-                throw new Exception(res.StatusCode.ToString());
+                throw new TheGameWebException(res.StatusCode.ToString(), "API rejected request");
             return res.IsSuccessStatusCode;
 
         }
@@ -39,6 +40,21 @@ namespace TheGame2_Frontend.Services
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<UserModel>(res.Content.ReadAsStringAsync().Result);
             else
                 return new UserModel();
+        }
+
+        public async void CreateUser(UserModel model)
+        {
+            string path = "/user/create";
+            HttpResponseMessage res = await requestService.PostRequestToApi(path, model);
+            CheckResponseMessage(res);
+
+        }
+
+        public async Task LogoutUser(string token)
+        {
+            string path = "/user/logout";
+            HttpResponseMessage res = await requestService.GetRequestToApi(path, token);
+            CheckResponseMessage(res);
         }
     }
 }

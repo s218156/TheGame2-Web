@@ -1,6 +1,18 @@
 ﻿@model SignUpModel
 
     <div class="col">
+        @if (ViewData["ErrorMessage"] != null)
+        {
+                <div class="alert alert-danger" role="alert">
+                @ViewData["ErrorMessage"]
+                    </div>
+        }
+        @if (ViewData["message"] != null)
+        {
+                        <div class="alert alert-success" role="alert">
+                @ViewData["message"]
+                        </div>
+        }
         <h2>Create account</h2>
         <form asp-action="SignUp">
             <div asp-validation-summary="ModelOnly" class="text-danger justify-content-center d-flex"></div>
