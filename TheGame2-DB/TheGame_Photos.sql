@@ -16,34 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `Photos`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `Photos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `Photos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `fullname` varchar(45) NOT NULL,
-  `authToken` varchar(50) NOT NULL,
-  `logedIn` tinyint NOT NULL DEFAULT '0',
-  `textureID` int NOT NULL DEFAULT '0',
-  `refreshToken` varchar(50) NOT NULL,
-  `expiredDate` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
+  `name` varchar(20) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `image` longblob NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `Photos`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'test','w8qjgbRaIeg=','Testowy','B1K90SaVrfbt6LSM51g0sb4FD476O38FjKUZdeXz2HNRf',0,0,'U3wWeUZ6sVMrbRsmHO6Os1EJo5dtRZDWjtjAucS4WLgPa','2023-03-28 15:36:53'),(2,'player','xiyUWrq1d8c=','Player1','C6cgfpUatEt99G28u7PDbSj74FfV67jkSM3miJAlxmm7W',0,0,'1kCYQbZi5xpz7pWaxKjSEnLuCDdN8kBh0rRCzeVTCJG9W','2023-03-28 15:37:02');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `Photos` WRITE;
+/*!40000 ALTER TABLE `Photos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Photos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

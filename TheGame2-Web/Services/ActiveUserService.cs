@@ -1,21 +1,24 @@
 ﻿using TheGame2_Backend;
+using TheGame2_Frontend.Models;
 using TheGame2_Library.Models;
-using TheGame2_Web.Models;
 
 namespace TheGame2_Web.Services
 {
     public class ActiveUserService
     {
         DBConnector db;
-        bool removalNeeded = false;
+
 
         private List<UserActivityModel> users = new List<UserActivityModel>();
         public ActiveUserService(DBConnector db)
         {
             this.db = db;
+            Thread t1 = new Thread(UserWorker);
+            t1.Start();
         }
         public void UpdateUserTime(UserModel user)
         {
+            bool removalNeeded = false;
             UserActivityModel dump = new UserActivityModel();
             if (!users.Where(m => m.user.username.Equals(user.username)).Any())
                 users.Add(new UserActivityModel() { user = user, lastActivityTime = DateTime.UtcNow });
@@ -51,5 +54,30 @@ namespace TheGame2_Web.Services
             }
         }
 
+        private void UserWorker()
+        {
+            bool removalNeeded = false;
+            UserActivityModel dump = new UserActivityModel();
+            while (true)
+            {
+
+                foreach (UserActivityModel entity in users)
+                {
+                    if (entity.lastActivityTime < DateTime.UtcNow.AddMinutes(-15))
+                    {
+                        db.LogoutUser(entity.user);
+                        removalNeeded = true;
+                        dump = entity;
+                    }
+                }
+                if (removalNeeded)
+                {
+                    users.Remove(dump);
+                    removalNeeded = false;
+                }
+                Thread.Sleep(5000);
+            }
+
+        }
     }
 }

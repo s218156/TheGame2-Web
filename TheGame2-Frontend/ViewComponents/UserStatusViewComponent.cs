@@ -18,8 +18,8 @@ namespace TheGame2_Frontend.ViewComponents
             {
                 try
                 {
-                    UserModel user = await apiService.GetUserData(token);
-                    return View("data", user);
+                    Task<UserModel> user = apiService.GetUserData(token);
+                    return View("data", await user);
                 }
                 catch (Exception e)
                 {
