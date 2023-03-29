@@ -1,9 +1,12 @@
-﻿namespace TheGame2_Library.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TheGame2_Library.Models
 {
     public class UserModel
     {
         public int id { get; set; }
         public string username { get; set; }
+        [DataType(DataType.Password)]
         public string password { get; set; }
         public string? fullname { get; set; }
         public int textureID { get; set; }

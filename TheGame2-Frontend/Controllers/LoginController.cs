@@ -108,7 +108,7 @@ namespace TheGame2_Frontend.Controllers
             }
             catch (TheGameWebException e)
             {
-                return RedirectToAction("LoginM", "Login");
+                return RedirectToAction("LoginE", "Login");
             }
         }
 

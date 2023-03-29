@@ -32,8 +32,9 @@ CREATE TABLE `users` (
   `textureID` int NOT NULL DEFAULT '0',
   `refreshToken` varchar(50) NOT NULL,
   `expiredDate` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +43,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'test','w8qjgbRaIeg=','Testowy','B1K90SaVrfbt6LSM51g0sb4FD476O38FjKUZdeXz2HNRf',0,0,'U3wWeUZ6sVMrbRsmHO6Os1EJo5dtRZDWjtjAucS4WLgPa','2023-03-28 15:36:53'),(2,'player','xiyUWrq1d8c=','Player1','C6cgfpUatEt99G28u7PDbSj74FfV67jkSM3miJAlxmm7W',0,0,'1kCYQbZi5xpz7pWaxKjSEnLuCDdN8kBh0rRCzeVTCJG9W','2023-03-28 15:37:02');
+INSERT INTO `users` VALUES (1,'test','w8qjgbRaIeg=','Testowy','HtX27LV2LTI5J1a8Q98tXiV0UBtemB1dOydmu3FHfPYmY',0,0,'n2XDj6m6IuHGWfdj8XuKepjUZFGzQh1hTFHKJRywRAJtz','2023-03-29 12:27:56'),(6,'test2','lSboAvXzP7s=','Testowy 2','O7q0aDYkXl80Jo9zQ8mhfdAyrNu5kE5c2aqMVhU3kJV1y',1,0,'PFOnU9oigO0aYUnV2PRoMpnb1LacgZrQEVYUgDgL78qoe','2023-03-29 12:43:41');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-28 15:30:58
+-- Dump completed on 2023-03-29 12:31:05

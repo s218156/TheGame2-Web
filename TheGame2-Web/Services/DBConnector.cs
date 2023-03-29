@@ -107,5 +107,11 @@ namespace TheGame2_Backend
             string query = "UPDATE TheGame.users SET logedIn=0, authToken='" + GenerateToken() + "', refreshToken='" + GenerateToken() + "' WHERE (username='" + model.username + "');";
             ProcessInsertUpdateQuery(query);
         }
+
+        public GameStatsModel GetPlayerGameStats(UserModel model)
+        {
+            string query = "SELECT g.id as id, g.playerID as playerID, g.offlineGameTime as offlineGameTime, g.onlineGameTime as onlineGameTime FROM TheGame.GameStats as g INNER JOIN TheGame.users AS u ON u.id=g.playerID WHERE u.username like '" + model.username + "';";
+            return ProcessSelectGameStats(query);
+        }
     }
 }

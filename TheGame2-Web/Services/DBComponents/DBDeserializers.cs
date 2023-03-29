@@ -18,5 +18,15 @@ namespace TheGame2_Web.Services.DBComponents
             model.authToken = dataReader.GetString("authToken");
             return model;
         }
+
+        public GameStatsModel DeserializeGameStats(MySqlDataReader dataReader)
+        {
+            GameStatsModel model = new GameStatsModel();
+            model.id = dataReader.GetInt32("id");
+            model.playerID = dataReader.GetInt32("playerID");
+            model.onlineGameTime = dataReader.GetInt32("onlineGameTime");
+            model.offlineGameTime = dataReader.GetInt32("offlineGameTime");
+            return model;
+        }
     }
 }

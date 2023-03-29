@@ -56,5 +56,16 @@ namespace TheGame2_Frontend.Services
             HttpResponseMessage res = await requestService.GetRequestToApi(path, token);
             CheckResponseMessage(res);
         }
+
+
+        public async Task<GameStatsModel> GetGameStatsForUser(string token)
+        {
+            string path = "/gamestats/GetGameStats";
+            HttpResponseMessage res = await requestService.GetRequestToApi(path, token);
+            if (CheckResponseMessage(res))
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<GameStatsModel>(res.Content.ReadAsStringAsync().Result);
+            else
+                return new GameStatsModel();
+        }
     }
 }

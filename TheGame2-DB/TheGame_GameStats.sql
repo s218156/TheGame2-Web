@@ -30,7 +30,7 @@ CREATE TABLE `GameStats` (
   PRIMARY KEY (`id`),
   KEY `statsToPlayer_idx` (`playerID`),
   CONSTRAINT `statsToPlayer` FOREIGN KEY (`playerID`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `GameStats` (
 
 LOCK TABLES `GameStats` WRITE;
 /*!40000 ALTER TABLE `GameStats` DISABLE KEYS */;
+INSERT INTO `GameStats` VALUES (1,1,10,1),(4,6,0,0);
 /*!40000 ALTER TABLE `GameStats` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-28 15:30:59
+-- Dump completed on 2023-03-29 12:31:04
