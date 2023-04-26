@@ -62,7 +62,7 @@ namespace TheGame2_Backend
             }
             catch (Exception e)
             {
-                throw e;
+                return new UserModel();
             }
         }
 
