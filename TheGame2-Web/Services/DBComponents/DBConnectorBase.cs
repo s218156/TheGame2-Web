@@ -176,6 +176,23 @@ namespace TheGame2_Backend.Services.DBComponents
             return gameStats.FirstOrDefault();
         }
 
+        protected InGameUserModel ProcessSelectInGameUser(string query)
+        {
+            List<InGameUserModel> users = new List<InGameUserModel>();
+            if (this.OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                    users.Add(deserializer.DeserializeInGameUser(dataReader));
+
+
+                dataReader.Close();
+                this.CloseConnection();
+            }
+            return users.FirstOrDefault();
+        }
+
 
 
 

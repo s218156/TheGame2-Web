@@ -85,5 +85,20 @@ namespace TheGame2_Library.Misc
             Console.WriteLine(Encrypt(model.password, model.username));
             return Encrypt(model.password, model.username);
         }
+        public static string EncryptPasswordForDatabase(string username, string password)
+        {
+            return Encrypt(password, username);
+        }
+
+        public static string DecryptPasswordFromHeader(string username, string password)
+        {
+            return Decrypt(password, username);
+        }
+
+        public static string DecryptPasswordForHeader(string username, string password)
+        {
+            return Encrypt(password, username);
+        }
+
     }
 }

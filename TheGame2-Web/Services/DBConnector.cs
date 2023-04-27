@@ -42,6 +42,13 @@ namespace TheGame2_Backend
             return new string(Enumerable.Repeat(chars, 45).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        private string GenerateToken(int length)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuwxyz";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public UserModel LoginUser(UserModel model)
         {
             string query = "SELECT * FROM TheGame.users WHERE username like '" + model.username + "' and password like '" + model.password + "';";
@@ -112,6 +119,24 @@ namespace TheGame2_Backend
         {
             string query = "SELECT g.id as id, g.playerID as playerID, g.offlineGameTime as offlineGameTime, g.onlineGameTime as onlineGameTime FROM TheGame.GameStats as g INNER JOIN TheGame.users AS u ON u.id=g.playerID WHERE u.username like '" + model.username + "';";
             return ProcessSelectGameStats(query);
+        }
+
+        public string GetInGameUserGameToken(string login, string password)
+        {
+            string query = "select i.id as id, i.userId as userId, i.gameToken as gameToken from TheGame.users as u inner join TheGame.InGameUser as i on i.userId = u.id where u.username like '"+login+"' and u.password like '"+password+"';";
+            InGameUserModel model = ProcessSelectInGameUser(query);
+            try
+            {
+                if ((model.gameToken == null) || (model.gameToken.Length == 0)) {
+                    model.gameToken = GenerateToken(150);
+                    query = "UPDATE TheGame.InGameUser SET gameToken='" + model.gameToken + "' WHERE (id=" + model.id + ");";
+                    ProcessInsertUpdateQuery(query);
+                }
+                return model.gameToken;
+            }catch(Exception e)
+            {
+                throw new TheGameWebException("600", "Error while user auth");
+            }
         }
     }
 }

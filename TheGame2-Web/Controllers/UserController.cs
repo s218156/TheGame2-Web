@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 using TheGame2_Backend;
 using TheGame2_Library.Exceptions;
 using TheGame2_Library.Misc;
@@ -103,6 +104,29 @@ namespace TheGame2_Web.Controllers
             }
 
 
+        }
+
+        [HttpGet("AuthGameInstance")]
+        public string AuthGameInstance()
+        {
+            
+            try
+            {
+                string username = Request.Headers["username"].ToString();
+                string password = Request.Headers["password"].ToString();
+                string myPass = CustomEncryption.DecryptPasswordFromHeader(username, password);
+                myPass = CustomEncryption.EncryptPasswordForDatabase(username, password);
+                return db.GetInGameUserGameToken(username, myPass);
+            }catch(TheGameWebException e)
+            {
+                Response.StatusCode = Int32.Parse(e.ExceptionCode);
+                return "";
+            }catch(Exception e)
+            {
+                Response.StatusCode = 600;
+                return "";
+            }
+            
         }
 
     }

@@ -28,5 +28,17 @@ namespace TheGame2_Web.Services.DBComponents
             model.offlineGameTime = dataReader.GetInt32("offlineGameTime");
             return model;
         }
+
+        public InGameUserModel DeserializeInGameUser(MySqlDataReader dataReader)
+        {
+            InGameUserModel model = new InGameUserModel();
+            model.id = dataReader.GetInt32("id");
+            model.userId = dataReader.GetInt32("userId");
+            if(!dataReader.IsDBNull(dataReader.GetOrdinal("gameToken")))
+                model.gameToken = dataReader.GetString("gameToken");
+            return model;
+        }
+
+
     }
 }
