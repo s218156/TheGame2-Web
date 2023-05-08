@@ -115,7 +115,7 @@ namespace TheGame2_Web.Controllers
                 string username = Request.Headers["username"].ToString();
                 string password = Request.Headers["password"].ToString();
                 string myPass = CustomEncryption.DecryptPasswordFromHeader(username, password);
-                myPass = CustomEncryption.EncryptPasswordForDatabase(username, password);
+                myPass = CustomEncryption.EncryptPasswordForDatabase(username, myPass);
                 return db.GetInGameUserGameToken(username, myPass);
             }catch(TheGameWebException e)
             {
