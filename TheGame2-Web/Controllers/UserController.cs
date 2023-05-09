@@ -129,5 +129,20 @@ namespace TheGame2_Web.Controllers
             
         }
 
+        [HttpGet("VerifyGameInstance")]
+        public void VerifyGameInstance()
+        {
+            try
+            {
+                string username = Request.Headers["username"].ToString();
+                string token = Request.Headers["token"].ToString();
+                db.VerifyInGameUser(username, token);
+            }
+            catch (TheGameWebException e)
+            {
+                Response.StatusCode = 600;
+            }
+        }
+
     }
 }

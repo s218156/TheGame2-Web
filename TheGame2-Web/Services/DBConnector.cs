@@ -138,5 +138,16 @@ namespace TheGame2_Backend
                 throw new TheGameWebException("600", "Error while user auth");
             }
         }
+
+        public void VerifyInGameUser(string username, string gameToken)
+        {
+            string query = "SELECT * FROM TheGame.users WHERE username like '" + username + "';";
+            List<UserModel> users = ProcessSelectUsers(query);
+            int id = users.FirstOrDefault().id;
+            query = "SELECT * FROM TheGame.InGameUser WHERE userId = " + id + " and gameToken like " + gameToken + ";";
+            InGameUserModel model = ProcessSelectInGameUser(query);
+            if (model == null)
+                throw new TheGameWebException("Can not verify");
+        }
     }
 }
