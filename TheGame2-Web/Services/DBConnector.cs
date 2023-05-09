@@ -149,5 +149,13 @@ namespace TheGame2_Backend
             if (model == null)
                 throw new TheGameWebException("Can not verify");
         }
+
+        public MultiplayerUserModel GetDataOfUser(string username, string token)
+        {
+            string query = "SELECT u.id as id, i.gameToken as gameToken, u.username as username, u.textureID as textureID, u.fullname as fullname FROM TheGame.users as u inner join TheGame.InGameUser as i on i.userId=u.id WHERE u.username like '" + username + "' and i.gameToken like " + token + ";";
+            return ProcessSelectMultiplayerUser(query);
+
+
+        }
     }
 }

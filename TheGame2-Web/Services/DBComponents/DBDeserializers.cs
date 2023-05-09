@@ -39,6 +39,18 @@ namespace TheGame2_Web.Services.DBComponents
             return model;
         }
 
+        public MultiplayerUserModel DeserializeMultiplayerUserModel(MySqlDataReader dataReader)
+        {
+            MultiplayerUserModel model = new MultiplayerUserModel();
+            model.id = dataReader.GetInt32("id");
+            model.textureId = dataReader.GetInt32("textureID");
+            if (!dataReader.IsDBNull(dataReader.GetOrdinal("gameToken")))
+                model.gameToken = dataReader.GetString("gameToken");
+            model.username = dataReader.GetString("username");
+            model.fullname = dataReader.GetString("fullname");
+            return model;
+        }
+
 
     }
 }

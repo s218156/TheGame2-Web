@@ -193,6 +193,23 @@ namespace TheGame2_Backend.Services.DBComponents
             return users.FirstOrDefault();
         }
 
+        protected MultiplayerUserModel ProcessSelectMultiplayerUser(string query)
+        {
+            List<MultiplayerUserModel> users = new List<MultiplayerUserModel>();
+            if (this.OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                    users.Add(deserializer.DeserializeMultiplayerUserModel(dataReader));
+
+
+                dataReader.Close();
+                this.CloseConnection();
+            }
+            return users.FirstOrDefault();
+        }
+
 
 
 

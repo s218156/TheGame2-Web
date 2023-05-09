@@ -144,5 +144,20 @@ namespace TheGame2_Web.Controllers
             }
         }
 
+        [HttpGet("GetDataOfUser")]
+        public MultiplayerUserModel GetDataOfUser()
+        {
+            try
+            {
+                string username = Request.Headers["username"].ToString();
+                string token = Request.Headers["token"].ToString();
+                return db.GetDataOfUser(username, token);
+            }catch(Exception e)
+            {
+                Response.StatusCode = 600;
+                return null;
+            }
+        }
+
     }
 }
