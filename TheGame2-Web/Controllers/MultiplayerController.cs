@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheGame2_Backend.Models;
 using TheGame2_Backend.Services;
+using TheGame2_Library.Models;
 
 namespace TheGame2_Backend.Controllers
 {
@@ -14,11 +15,12 @@ namespace TheGame2_Backend.Controllers
             this.gameService = gameService;
         }
 
-        [HttpGet("Refresh")]
-        public List<PlayerModel> Refresh()
+        [HttpPost("RefreshSessionData")]
+        public List<PlayerModel> Refresh([FromBody] PlayerModel model)
         {
-            return gameService.sessions[0].players;
+            return (List<PlayerModel>)gameService.sessions[0].players.Where(p => p.id != model.id).ToList();
         }
+
         [HttpPost("JoinSession")]
         public void JoinSession(PlayerModel player)
         {

@@ -127,11 +127,29 @@ namespace TheGame2_Backend
             InGameUserModel model = ProcessSelectInGameUser(query);
             try
             {
-                if ((model.gameToken == null) || (model.gameToken.Length == 0)) {
-                    model.gameToken = GenerateToken(150);
-                    query = "UPDATE TheGame.InGameUser SET gameToken='" + model.gameToken + "' WHERE (id=" + model.id + ");";
-                    ProcessInsertUpdateQuery(query);
+                if (model != null)
+                {
+                    if ((model.gameToken == null) || (model.gameToken.Length == 0))
+                    {
+                        model.gameToken = GenerateToken(150);
+                        query = "UPDATE TheGame.InGameUser SET gameToken='" + model.gameToken + "' WHERE (id=" + model.id + ");";
+                        ProcessInsertUpdateQuery(query);
+                    }
                 }
+                else
+                {
+                    query = "SELECT * FROM TheGame.users WHERE username like '" + login + "' and password like '" + password + "';";
+                    UserModel userM=ProcessSelectUser(query);
+                    if (userM != null)
+                    {
+                        model = new InGameUserModel();
+                        model.userId = userM.id;
+                        model.gameToken = GenerateToken(150);
+                        query = "INSERT INTO TheGame.InGameUser (userID, gameToken) VALUES("+model.userId+",'"+model.gameToken+"');";
+                        ProcessInsertUpdateQuery(query);
+                    }
+                }
+                
                 return model.gameToken;
             }catch(Exception e)
             {
