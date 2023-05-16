@@ -172,8 +172,32 @@ namespace TheGame2_Backend
         {
             string query = "SELECT u.id as id, i.gameToken as gameToken, u.username as username, u.textureID as textureID, u.fullname as fullname FROM TheGame.users as u inner join TheGame.InGameUser as i on i.userId=u.id WHERE u.username like '" + username + "' and i.gameToken like " + token + ";";
             return ProcessSelectMultiplayerUser(query);
-
-
         }
+
+        public void UpdateTextureIDForUser(UserModel model)
+        {
+            string query = "UPDATE TheGame.users SET textureID=" + model.textureID + " WHERE (username like '" + model.username + "' and authToken like '"+model.authToken+"' );";
+            try
+            {
+                ProcessInsertUpdateQuery(query);
+            }catch(Exception e)
+            {
+                throw e;
+            }
+            
+        }
+
+        public void UpdateUser(UserModel model)
+        {
+            string query = "UPDATE TheGame.users SET fullname='" + model.fullname + "' WHERE (username like '" + model.username + "' and authToken like '" + model.authToken + "' );";
+            try
+            {
+				ProcessInsertUpdateQuery(query);
+			}catch(Exception e)
+            {
+                throw e;
+            }
+            
+		}
     }
 }

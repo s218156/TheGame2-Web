@@ -1,4 +1,5 @@
-﻿using TheGame2_Library.Exceptions;
+﻿using NuGet.Common;
+using TheGame2_Library.Exceptions;
 using TheGame2_Library.Models;
 
 namespace TheGame2_Frontend.Services
@@ -49,8 +50,23 @@ namespace TheGame2_Frontend.Services
             CheckResponseMessage(res);
 
         }
+		public async void UpdateUserData(string token, UserModel model)
+		{
+			string path = "/user/update";
+			HttpResponseMessage res = await requestService.PostRequestToApi(path, token ,model);
+			CheckResponseMessage(res);
 
-        public async Task LogoutUser(string token)
+		}
+
+		public async void UpdateTextureID(string token, UserModel model)
+		{
+			string path = "/user/SetTextureID";
+			HttpResponseMessage res = await requestService.PostRequestToApi(path, token, model);
+			CheckResponseMessage(res);
+
+		}
+
+		public async Task LogoutUser(string token)
         {
             string path = "/user/logout";
             HttpResponseMessage res = await requestService.GetRequestToApi(path, token);

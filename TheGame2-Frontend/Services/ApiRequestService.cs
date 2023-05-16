@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using NuGet.Common;
+using System.Net.Http.Headers;
 using TheGame2_Library.Models;
 
 namespace TheGame2_Frontend.Services
@@ -13,21 +14,36 @@ namespace TheGame2_Frontend.Services
 
         }
 
-        public async Task<HttpResponseMessage> PostRequestToApi(string path, UserModel model)
+        public async Task<HttpResponseMessage> PostRequestToApi(string path,string token, UserModel model)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_address);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var postTask = client.PostAsJsonAsync<UserModel>(path, model);
+				client.DefaultRequestHeaders.Add("auth", token);
+				var postTask = client.PostAsJsonAsync<UserModel>(path, model);
                 postTask.Wait();
                 var result = postTask.Result;
                 return result;
             }
         }
 
-        public async Task<HttpResponseMessage> GetRequestToApi(string path, string token)
+		public async Task<HttpResponseMessage> PostRequestToApi(string path, UserModel model)
+		{
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(_address);
+				client.DefaultRequestHeaders.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+				var postTask = client.PostAsJsonAsync<UserModel>(path, model);
+				postTask.Wait();
+				var result = postTask.Result;
+				return result;
+			}
+		}
+
+		public async Task<HttpResponseMessage> GetRequestToApi(string path, string token)
         {
             using (var client = new HttpClient())
             {

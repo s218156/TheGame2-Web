@@ -1,0 +1,37 @@
+﻿@model TheGame2_Library.Models.UserModel
+
+@{
+    ViewData["Title"] = "AccountDetails";
+    string miniaturePath = "/Images/playerMiniatures/" + Model.textureID.ToString() + ".png";
+}
+
+<h1>AccountDetails</h1>
+
+<div>
+    <h4>UserModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.username)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.username)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fullname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fullname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.textureID)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src=@miniaturePath width="50" height="50" />
+        </dd>
+    </dl>
+    @Html.ActionLink("Change Texture", "ChangeTexture")
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit")
+</div>

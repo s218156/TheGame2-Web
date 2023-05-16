@@ -159,5 +159,39 @@ namespace TheGame2_Web.Controllers
             }
         }
 
+        [HttpPost("SetTextureID")]
+        public void SetTextureID([FromBody] UserModel model)
+        {
+            string token = Request.Headers["auth"].ToString();
+            try
+            {
+                UserModel user = CustomEncryption.DecryptUser(token);
+                user.textureID= model.textureID;
+                db.UpdateTextureIDForUser(user);
+
+            }
+            catch (TheGameWebException e)
+            {
+                Response.StatusCode = Int32.Parse(e.ExceptionCode);
+            }
+        }
+
+        [HttpPost("Update")]
+        public void Update([FromBody] UserModel model)
+        {
+			string token = Request.Headers["auth"].ToString();
+			try
+			{
+				UserModel user = CustomEncryption.DecryptUser(token);
+                user.fullname = model.fullname;
+				db.UpdateUser(user);
+
+			}
+			catch (TheGameWebException e)
+			{
+				Response.StatusCode = Int32.Parse(e.ExceptionCode);
+			}
+		}
+
     }
 }
