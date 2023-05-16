@@ -28,6 +28,7 @@ namespace TheGame2_Backend.Controllers
             if (tmpPlayer == null)
             {
                 gameService.sessions[0].players.Add(player);
+                gameService.sessions[0].playersActivity.Add(new PlayerActivityModel() { player = player, lastActivityTime = DateTime.Now });
             }
             
         }
@@ -39,6 +40,14 @@ namespace TheGame2_Backend.Controllers
             if(tmpPlayer != null)
             {
                 gameService.sessions[0].players.Where(p => p.id == player.id).FirstOrDefault().rectangle = player.rectangle;
+                gameService.sessions[0].playersActivity.Where(p=>p.player.id==player.id).FirstOrDefault().lastActivityTime = DateTime.Now;
+            }
+            foreach(PlayerActivityModel playerActivity in gameService.sessions[0].playersActivity)
+            {
+                if(playerActivity.lastActivityTime > DateTime.Now.AddMinutes(5))
+                {
+                    gameService.sessions[0].RemovePlayer(playerActivity.player);
+                }
             }
         }
 

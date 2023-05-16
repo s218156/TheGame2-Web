@@ -1,6 +1,6 @@
 ﻿using TheGame2_Library.Models;
 
-namespace TheGame2_Frontend.Models
+namespace TheGame2_Backend.Models
 {
     public class UserActivityModel
     {
