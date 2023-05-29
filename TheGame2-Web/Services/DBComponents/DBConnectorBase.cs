@@ -173,7 +173,10 @@ namespace TheGame2_Backend.Services.DBComponents
                 dataReader.Close();
                 this.CloseConnection();
             }
-            return gameStats.FirstOrDefault();
+            if (gameStats.Count() > 0)
+                return gameStats.FirstOrDefault();
+            else
+                return null;
         }
 
         protected InGameUserModel ProcessSelectInGameUser(string query)

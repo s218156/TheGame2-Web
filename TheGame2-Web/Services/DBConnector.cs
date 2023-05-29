@@ -118,7 +118,16 @@ namespace TheGame2_Backend
         public GameStatsModel GetPlayerGameStats(UserModel model)
         {
             string query = "SELECT g.id as id, g.playerID as playerID, g.offlineGameTime as offlineGameTime, g.onlineGameTime as onlineGameTime FROM TheGame.GameStats as g INNER JOIN TheGame.users AS u ON u.id=g.playerID WHERE u.username like '" + model.username + "';";
-            return ProcessSelectGameStats(query);
+            GameStatsModel gameStats = ProcessSelectGameStats(query);
+            if (gameStats != null)
+                return gameStats;
+            else
+            {
+                UserModel user = GetUserData(model);
+                query = "INSERT INTO TheGame.GameStats (playerID, offlineGameTime, onlineGameTime) VALUES (" + user.id + ",0,0);";
+                ProcessInsertUpdateQuery(query);
+                return new GameStatsModel() { playerID = user.id, offlineGameTime = 0, onlineGameTime = 0 };
+            }
         }
 
         public string GetInGameUserGameToken(string login, string password)
